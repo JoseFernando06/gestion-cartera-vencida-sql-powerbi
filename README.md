@@ -10,7 +10,7 @@
 
 Proyecto de análisis de cartera vencida desarrollado con SQL Server y Power BI,
 simulando el rol de analista de crédito y cobranza en una empresa comercial ficticia
-(Comercial Ejemplo Ltda.) con un portafolio de 15 clientes y una deuda total de $40,45M.
+(Agrocomercial Sur S.A.) con un portafolio de 15 clientes y una deuda total de $40,45M.
 
 ---
 
