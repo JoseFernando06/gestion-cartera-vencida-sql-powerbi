@@ -118,3 +118,9 @@ SELECT
     END AS provision
 FROM Clientes c
 INNER JOIN
+Deudas d ON c.id_cliente = d.id_cliente
+LEFT JOIN  Pagos p   ON d.id_deuda   = p.id_deuda
+GROUP BY
+    c.nombre, c.canal_contacto, c.zona,
+    d.monto_deuda, d.fecha_vencimiento, d.fecha_consulta
+ORDER BY saldo_pendiente DESC;
