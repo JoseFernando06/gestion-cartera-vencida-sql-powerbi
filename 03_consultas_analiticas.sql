@@ -69,4 +69,52 @@ JOIN Clientes c ON d.id_cliente = c.id_cliente
 GROUP BY c.canal_contacto
 HAVING SUM(d.monto_deuda) > 5000000
 ORDER BY deuda_total DESC;
-Agrega bloque 3: JOINs, CASE WHEN y consulta maestra de cartera
+-- =============================================
+-- BLOQUE 3: JOINs + CASE WHEN
+-- =============================================
+
+-- 3.1 Saldo pendiente real por cliente (LEFT JOIN Pagos)
+SELECT
+    c.nombre,
+    c.canal_contacto,
+    d.monto_deuda,
+    ISNULL(SUM(p.monto_pagado), 0)                   AS total_pagado,
+    d.monto_deuda - ISNULL(SUM(p.monto_pagado), 0)  AS saldo_pendiente,
+    CASE
+        WHEN ISNULL(SUM(p.monto_pagado), 0) = 0
+            THEN 'Sin pago'
+        WHEN ISNULL(SUM(p.monto_pagado), 0) >= d.monto_deuda
+            THEN 'Pagado total'
+        ELSE 'Pago parcial'
+    END AS estado_pago
+FROM Clientes c
+INNER JOIN Deudas d ON c.id_cliente = d.id_cliente
+LEFT JOIN  Pagos p  ON d.id_deuda   = p.id_deuda
+GROUP BY c.nombre, c.canal_contacto, d.monto_deuda
+ORDER BY saldo_pendiente DESC;
+
+-- 3.2 Tramo de mora calculado dinámicamente con DATEDIFF
+SELECT
+    c.nombre,
+    d.monto_deuda,
+    DATEDIFF(DAY, d.fecha_vencimiento, d.fecha_consulta) AS dias_mora,
+    CASE
+        WHEN DATEDIFF(DAY, d.fecha_vencimiento, d.fecha_consulta) <= 30
+            THEN '0-30 días (Preventiva)'
+        WHEN DATEDIFF(DAY, d.fecha_vencimiento, d.fecha_consulta) <= 60
+            THEN '31-60 días (Activa)'
+        WHEN DATEDIFF(DAY, d.fecha_vencimiento, d.fecha_consulta) <= 90
+            THEN '61-90 días (Extrajudicial)'
+        ELSE '+90 días (Judicial/Castigo)'
+    END AS tramo_mora,
+    CASE
+        WHEN DATEDIFF(DAY, d.fecha_vencimiento, d.fecha_consulta) <= 30
+            THEN d.monto_deuda * 0.05
+        WHEN DATEDIFF(DAY, d.fecha_vencimiento, d.fecha_consulta) <= 60
+            THEN d.monto_deuda * 0.25
+        WHEN DATEDIFF(DAY, d.fecha_vencimiento, d.fecha_consulta) <= 90
+            THEN d.monto_deuda * 0.60
+        ELSE d.monto_deuda * 1.00
+    END AS provision
+FROM Clientes c
+INNER JOIN
