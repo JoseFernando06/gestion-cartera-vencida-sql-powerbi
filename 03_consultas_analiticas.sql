@@ -69,3 +69,4 @@ JOIN Clientes c ON d.id_cliente = c.id_cliente
 GROUP BY c.canal_contacto
 HAVING SUM(d.monto_deuda) > 5000000
 ORDER BY deuda_total DESC;
+Agrega bloque 3: JOINs, CASE WHEN y consulta maestra de cartera
