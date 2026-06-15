@@ -124,3 +124,49 @@ GROUP BY
     c.nombre, c.canal_contacto, c.zona,
     d.monto_deuda, d.fecha_vencimiento, d.fecha_consulta
 ORDER BY saldo_pendiente DESC;
+-- =============================================
+-- BLOQUE 4: FUNCIONES DE VENTANA
+-- =============================================
+
+-- 4.1 Ranking de clientes por deuda dentro de cada zona
+SELECT
+    c.nombre,
+    c.zona,
+    d.monto_deuda,
+    ROW_NUMBER() OVER (
+        PARTITION BY c.zona
+        ORDER BY d.monto_deuda DESC
+    ) AS ranking_en_zona
+FROM Clientes c
+INNER JOIN Deudas d ON c.id_cliente = d.id_cliente;
+
+-- 4.2 Peor deudor por zona (subconsulta + ROW_NUMBER)
+SELECT nombre, zona, monto_deuda
+FROM (
+    SELECT
+        c.nombre,
+        c.zona,
+        d.monto_deuda,
+        ROW_NUMBER() OVER (
+            PARTITION BY c.zona
+            ORDER BY d.monto_deuda DESC
+        ) AS ranking_en_zona
+    FROM Clientes c
+    INNER JOIN Deudas d ON c.id_cliente = d.id_cliente
+) AS subconsulta
+WHERE ranking_en_zona = 1;
+
+-- 4.3 Porcentaje del total y acumulado por cliente
+SELECT
+    c.nombre,
+    d.monto_deuda,
+    SUM(d.monto_deuda) OVER ()                              AS deuda_total_portafolio,
+    CAST(ROUND(d.monto_deuda * 100.0 /
+        SUM(d.monto_deuda) OVER (), 1) AS DECIMAL(5,1))    AS pct_del_total,
+    SUM(d.monto_deuda) OVER (
+        ORDER BY d.monto_deuda DESC
+        ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
+    )                                                       AS acumulado
+FROM Clientes c
+INNER JOIN Deudas d ON c.id_cliente = d.id_cliente
+ORDER BY d.monto_deuda DESC;
