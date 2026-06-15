@@ -1,6 +1,6 @@
 -- =============================================
 -- SCRIPT 02: Inserción de datos
--- Portafolio ficticio: Comercial Ejemplo Ltda.
+-- Portafolio ficticio: Agrocomercial Sur S.A
 -- Período: Junio 2026
 -- =============================================
 
