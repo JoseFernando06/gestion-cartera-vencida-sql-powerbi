@@ -1,0 +1,5 @@
+﻿ID,Cliente / Empresa,RUT,Deuda ($),Fecha Vcto.,Días Mora,Tramo,% Provisión,Provisión ($),Contacto,Acción Recomendada,Estado Gestión,dias_mora,tramo_mora
+C014,Maderera Los Pinos,76.444.555-6,7200000,2026-02-01,130.0,+90 días (Judicial/Castigo),1.0,7200000,Sin contacto,Derivar a abogado / evaluar castigo contable,Pendiente,143.0,+90 Judicial/Castigo
+C007,Construmart del Sur Ltda.,76.789.012-3,6800000,2026-02-11,120.0,+90 días (Judicial/Castigo),1.0,6800000,Sin contacto,Derivar a abogado / evaluar castigo contable,Pendiente,133.0,+90 Judicial/Castigo
+C004,Agro San Pedro Ltda.,76.456.789-0,5600000,2026-03-07,96.0,+90 días (Judicial/Castigo),1.0,5600000,Sin contacto,Derivar a abogado / evaluar castigo contable,Pendiente,109.0,+90 Judicial/Castigo
+C011,Importadora del Maule,76.111.222-3,3900000,2026-03-21,82.0,61–90 días (Extrajudicial),0.6,2340000,Sin contacto,Carta formal + cobranza extrajudicial,Pendiente,95.0,+90 Judicial/Castigo
