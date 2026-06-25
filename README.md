@@ -47,7 +47,7 @@ aplicando criterios IFRS 9 para el cálculo de provisiones.
 
 ## Dashboard Power BI
 
-![Dashboard de Cartera Vencida](dashboard_cartera.png)
+![Dashboard de Cartera Vencida](dashboard_cartera.png.jpg)
 
 ---
 
@@ -61,7 +61,7 @@ aplicando criterios IFRS 9 para el cálculo de provisiones.
 | `exportar_mora_critica.py` | Script Python que exporta clientes con mora >90 días a CSV desde el portafolio Excel |
 | `mora_critica_20260624.csv` | CSV generado con los 4 clientes en mora crítica |
 | `Cartera Cobranza Portafolio 2026.xlsx` | Portafolio completo del período en Excel |
-| `dashboard_cartera.png` | Captura del dashboard Power BI |
+| `dashboard_cartera.png.jpg` | Captura del dashboard Power BI |
 
 ---
 
