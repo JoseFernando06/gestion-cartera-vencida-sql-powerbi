@@ -1,0 +1,15 @@
+# Archivos temporales de sistema
+Thumbs.db
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Claude
+.claude/

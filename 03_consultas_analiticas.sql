@@ -93,10 +93,14 @@ LEFT JOIN  Pagos p  ON d.id_deuda   = p.id_deuda
 GROUP BY c.nombre, c.canal_contacto, d.monto_deuda
 ORDER BY saldo_pendiente DESC;
 
--- 3.2 Tramo de mora calculado dinámicamente con DATEDIFF
+-- 3.2 Consulta maestra: tramo de mora, provisión IFRS 9 y saldo pendiente
 SELECT
     c.nombre,
+    c.canal_contacto,
+    c.zona,
     d.monto_deuda,
+    ISNULL(SUM(p.monto_pagado), 0)                   AS total_pagado,
+    d.monto_deuda - ISNULL(SUM(p.monto_pagado), 0)  AS saldo_pendiente,
     DATEDIFF(DAY, d.fecha_vencimiento, d.fecha_consulta) AS dias_mora,
     CASE
         WHEN DATEDIFF(DAY, d.fecha_vencimiento, d.fecha_consulta) <= 30
@@ -117,9 +121,8 @@ SELECT
         ELSE d.monto_deuda * 1.00
     END AS provision
 FROM Clientes c
-INNER JOIN
-Deudas d ON c.id_cliente = d.id_cliente
-LEFT JOIN  Pagos p   ON d.id_deuda   = p.id_deuda
+INNER JOIN Deudas d ON c.id_cliente = d.id_cliente
+LEFT JOIN  Pagos p  ON d.id_deuda   = p.id_deuda
 GROUP BY
     c.nombre, c.canal_contacto, c.zona,
     d.monto_deuda, d.fecha_vencimiento, d.fecha_consulta

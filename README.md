@@ -4,8 +4,9 @@
 ![Power BI](https://img.shields.io/badge/Power%20BI-F2C811?style=for-the-badge&logo=powerbi&logoColor=black)
 ![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
 ![Excel](https://img.shields.io/badge/Excel-217346?style=for-the-badge&logo=microsoftexcel&logoColor=white)
+![License: MIT](https://img.shields.io/badge/Licencia-MIT-blue?style=for-the-badge)
 
-**Autor:** José Fernando Vargas Vallejos
+**Autor:** [José Fernando Vargas Vallejos](https://www.linkedin.com/in/josefernandovargas)
 **Perfil:** Ingeniero Comercial | Analista de Crédito y Cobranza
 **Empresa simulada:** Agrocomercial Sur S.A.
 **Período:** Junio 2026
@@ -47,7 +48,7 @@ aplicando criterios IFRS 9 para el cálculo de provisiones.
 
 ## Dashboard Power BI
 
-![Dashboard de Cartera Vencida](dashboard_cartera.png.jpg)
+![Dashboard de Cartera Vencida](dashboard_cartera.jpg)
 
 ---
 
@@ -61,7 +62,7 @@ aplicando criterios IFRS 9 para el cálculo de provisiones.
 | `exportar_mora_critica.py` | Script Python que exporta clientes con mora >90 días a CSV desde el portafolio Excel |
 | `mora_critica_20260624.csv` | CSV generado con los 4 clientes en mora crítica |
 | `Cartera Cobranza Portafolio 2026.xlsx` | Portafolio completo del período en Excel |
-| `dashboard_cartera.png.jpg` | Captura del dashboard Power BI |
+| `dashboard_cartera.jpg` | Captura del dashboard Power BI |
 
 ---
 
